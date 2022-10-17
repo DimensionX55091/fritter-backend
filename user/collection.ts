@@ -91,6 +91,25 @@ class UserCollection {
     const user = await UserModel.deleteOne({_id: userId});
     return user !== null;
   }
+
+  /**
+   * One user follows another user.
+   * 
+   * @param {string} followerId - The userId of the follower
+   * @param {string} followedId - The userId of the followed account
+   * @returns {Promise<Boolean>} - true if the follower succesfully follows the followed account
+   */
+  static async follow(followerId: Types.ObjectId | string, followedId: Types.ObjectId | string): Promise<boolean> {
+    const follower = await UserCollection.findOneByUserId(followerId);
+    const followed = await UserCollection.findOneByUserId(followedId)
+    if (follower === null || followed === null) {
+      return false
+    } else {
+      follower.followings.add(followed);
+      followed.followers.add(follower);
+      return true
+    }
+  }
 }
 
 export default UserCollection;
