@@ -223,9 +223,12 @@ This renders the `index.html` file that will be used to interact with the backen
 
 #### `PUT /api/freets/:freetId?` - Update an existing freet
 
-**Body**
+**Body** _(no need to add fields that are not being changed)_
 
 - `content` _{string}_ - The new content of the freet
+- `numReport` _{number}_ - The number of reports on the freet
+- `threshold` _{number}_ - The threshold of the number of reports for a warning sign to appear
+- `mainReason` _{Array<Reason>}_ The list of the main reasons the freet is reported for
 
 **Returns**
 
@@ -239,6 +242,27 @@ This renders the `index.html` file that will be used to interact with the backen
 - `403` if the user is not the author of the freet
 - `400` if the new freet content is empty or a stream of empty spaces
 - `413` if the new freet content is more than 140 characters long
+- `400` if the numReport is a negative number or not an integer
+- `400` if the threshold is a negative number or not an integer
+- `400` if the mainReason is an empty array
+
+#### `POST /api/freets/:freetId/reports` - Create a report for an existing freet
+
+**Body**
+
+- `reporterId` _{number}_ - The user ID of the reporter
+- `reason` _{Set{Reason}}_ - The reasons of the report
+
+**Returns**
+
+- A success message
+- An object with the updated freet
+
+**Throws**
+
+- `403` if the user is not logged in
+- `404` if the freetId is invalid
+- `400` if the reasons content is empty
 
 #### `POST /api/users/session` - Sign in user
 
@@ -292,6 +316,9 @@ This renders the `index.html` file that will be used to interact with the backen
 
 - `username` _{string}_ - The user's username
 - `password` _{string}_ - The user's password
+- `followers` _{Set<number>}_ The user's list of followers' IDs
+- `followings` _{Set<number>}_ The user's list of IDs of the accounts they follow
+- `priority` _{Set<number>}_ The user's list of priority accounts' IDs
 
 **Returns**
 
