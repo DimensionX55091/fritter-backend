@@ -228,7 +228,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `content` _{string}_ - The new content of the freet
 - `numReport` _{number}_ - The number of reports on the freet
 - `threshold` _{number}_ - The threshold of the number of reports for a warning sign to appear
-- `mainReason` _{Array&ltReason&gt}_ The list of the main reasons the freet is reported for
+- `mainReason` _{Array&lt;Reason&gt;}_ The list of the main reasons the freet is reported for
 
 **Returns**
 
@@ -251,7 +251,7 @@ This renders the `index.html` file that will be used to interact with the backen
 **Body**
 
 - `reporterId` _{number}_ - The user ID of the reporter
-- `reason` _{Set&ltReason&gt}_ - The reasons of the report
+- `reason` _{Set&lt;Reason&gt;}_ - The reasons of the report
 
 **Returns**
 
@@ -316,9 +316,9 @@ This renders the `index.html` file that will be used to interact with the backen
 
 - `username` _{string}_ - The user's username
 - `password` _{string}_ - The user's password
-- `followers` _{Set&ltnumber&gt}_ The user's list of followers' IDs
-- `followings` _{Set&ltnumber&gt}_ The user's list of IDs of the accounts they follow
-- `priority` _{Set&ltnumber&gt}_ The user's list of priority accounts' IDs
+- `followers` _{Set&lt;number&gt;}_ The user's list of followers' IDs
+- `followings` _{Set&lt;number&gt;}_ The user's list of IDs of the accounts they follow
+- `priority` _{Set&lt;number&gt;}_ The user's list of priority accounts' IDs
 
 **Returns**
 
