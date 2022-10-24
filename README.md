@@ -246,11 +246,12 @@ This renders the `index.html` file that will be used to interact with the backen
 - `400` if the threshold is a negative number or not an integer
 - `400` if the mainReason is an empty array
 
-#### `POST /api/freets/:freetId/reports` - Create a report for an existing freet
+#### `POST /api/reports` - Create a report for an existing freet
 
 **Body**
 
-- `reporterId` _{number}_ - The user ID of the reporter
+- `reporterId` _{string}_ - The user ID of the reporter
+- `freetId` _{string}_ The ID of the freet
 - `reason` _{Set&lt;Reason&gt;}_ - The reasons of the report
 
 **Returns**
@@ -263,6 +264,17 @@ This renders the `index.html` file that will be used to interact with the backen
 - `403` if the user is not logged in
 - `404` if the freetId is invalid
 - `400` if the reasons content is empty
+
+#### `DELETE /api/reports/:reportId?` - Delete a report
+
+**Returns**
+
+- A success message
+
+**Throws**
+
+- `403` if the user is not logged in
+- `404` if the reportId is invalid
 
 #### `POST /api/users/session` - Sign in user
 
@@ -316,8 +328,8 @@ This renders the `index.html` file that will be used to interact with the backen
 
 - `username` _{string}_ - The user's username
 - `password` _{string}_ - The user's password
-- `followers` _{Set&lt;number&gt;}_ The user's list of followers' IDs
-- `followings` _{Set&lt;number&gt;}_ The user's list of IDs of the accounts they follow
+<!-- - `followers` _{Set&lt;number&gt;}_ The user's list of followers' IDs
+- `followings` _{Set&lt;number&gt;}_ The user's list of IDs of the accounts they follow -->
 - `priority` _{Set&lt;number&gt;}_ The user's list of priority accounts' IDs
 
 **Returns**
@@ -340,3 +352,37 @@ This renders the `index.html` file that will be used to interact with the backen
 **Throws**
 
 - `403` if the user is not logged in
+
+#### `PUT /api/follows/follow/:followedUsername` - Follow a user
+
+**Body**
+
+- `followerId` _{string}_ - The ID of the follower
+
+**Returns**
+
+- A success message
+- An object with the usernames of the follower and the followed users
+
+**Throws**
+
+- `403` if the user is not logged in
+- `400` if the users do not exist
+- `400` if the user already follows that user
+
+#### `PUT /api/follows/unfollow/:followedUsername` - Follow a user
+
+**Body**
+
+- `followerId` _{string}_ - The ID of the follower
+
+**Returns**
+
+- A success message
+- An object with the usernames of the follower and the unfollowed users
+
+**Throws**
+
+- `403` if the user is not logged in
+- `400` if the users do not exist
+- `400` if the user has not followed that user
